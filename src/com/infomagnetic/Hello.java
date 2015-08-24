@@ -8,7 +8,9 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.infomagnetic.inverseproblem.CEA.CEAlgorithm;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.SerializationUtils;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -23,17 +25,16 @@ public class Hello {
         CEAlgorithm ceAlgorithm = new CEAlgorithm(individualPropertiesSize, populationLength);
         ceAlgorithm.initPopulation(-0.1, 0.1);
 
-        String testarrayString = xVector.toString();
         AmazonS3 s3Client = new AmazonS3Client();
         ObjectMetadata metadata = new ObjectMetadata();
+        byte[] byteStrem = SerializationUtils.serialize(ceAlgorithm.population);
+        ByteArrayInputStream input = new ByteArrayInputStream(byteStrem);
 
-        InputStream in = IOUtils.toInputStream(testarrayString, "UTF-8");
-
-        PutObjectRequest putObjectRequest = new PutObjectRequest("yutonginverseproblem", "test/hello.txt", in, metadata);
+        PutObjectRequest putObjectRequest = new PutObjectRequest("yutonginverseproblem", "test/hello.txt", input, metadata);
         s3Client.putObject(putObjectRequest);
 
         LambdaLogger logger = context.getLogger();
         logger.log("received new: ");
-        return String.valueOf(1);
+        return "Sucess";
     }
 }

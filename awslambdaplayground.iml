@@ -11,6 +11,7 @@
     <orderEntry type="library" name="aws-java-sdk-1.10.12" level="project" />
     <orderEntry type="library" name="aspectj-1" level="project" />
     <orderEntry type="library" name="commons-io:commons-io:2.4" level="project" />
+    <orderEntry type="library" name="org.apache.commons:commons-lang3:3.4" level="project" />
     <orderEntry type="library" name="InverseProblemJava" level="project" />
   </component>
 </module>
