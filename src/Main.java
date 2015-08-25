@@ -14,7 +14,5 @@ public class Main {
         Path path = Paths.get("src/hello.txt");
         byte[] data = Files.readAllBytes(path);
         Individual[][] population = SerializationUtils.deserialize(data);
-        int a = 1;
-
     }
 }
